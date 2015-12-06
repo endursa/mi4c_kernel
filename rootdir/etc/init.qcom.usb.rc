@@ -25,8 +25,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.qcom.usb.cdrom.rc
-
 on init
     write /sys/class/android_usb/android0/f_rndis/wceis 1
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
@@ -860,10 +858,8 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/idProduct ff60
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/functions mtp,mass_storage
+    write /sys/class/android_usb/android0/functions mtp
     write /sys/class/android_usb/android0/enable 1
-    write /sys/class/android_usb/android0/f_mass_storage/lun/ro 1
-    trigger set_cdrom_install_file
     start mdbd
     setprop sys.usb.state ${sys.usb.config}
 
@@ -874,10 +870,8 @@ on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/idProduct ff68
     write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
     write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/functions mtp,mass_storage,adb
+    write /sys/class/android_usb/android0/functions mtp,adb
     write /sys/class/android_usb/android0/enable 1
-    write /sys/class/android_usb/android0/f_mass_storage/lun/ro 1
-    trigger set_cdrom_install_file
     start mdbd
     start adbd
     setprop sys.usb.state ${sys.usb.config}
